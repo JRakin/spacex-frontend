@@ -1,9 +1,8 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
-
-import HelloWorld from '../components/HelloWorld.vue'
+import Launches from '@/views/Launches.vue';
 
 const routes = [
-  { path: '/',  name: 'HelloWorld', component: HelloWorld },
+  { path: '/',  name: 'Launches', component: Launches },
 ]
 
 const router = createRouter({
