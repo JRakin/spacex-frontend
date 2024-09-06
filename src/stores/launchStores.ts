@@ -1,22 +1,10 @@
 import { defineStore } from 'pinia'
 import { apiClient } from '@/helper/helper';
-
-export interface Launch {
-    flight_number: number;
-    name: string;
-    date_utc: Date;
-}
-
-export interface LaunchState {
-    launches: Launch[];
-    loading: boolean;
-    error: string | null;
-}
-
+import type { Launch, LaunchState } from '@/types/launch';
 
 export const useLaunchStore = defineStore('launchStore', {
     state: (): LaunchState => ({
-        launches: [] as Array<{ flight_number: number; name: string; date_utc: Date; }>,
+        launches: [] as Array<{ flight_number: number; name: string; date_utc: Date; _id: string }>,
         loading: false,
         error: null,
     }),
@@ -34,6 +22,37 @@ export const useLaunchStore = defineStore('launchStore', {
                 console.error(err);
             } finally {
                 this.loading = false;
+            }
+        },
+
+        async fetchSavedLaunches() {
+            this.loading = true;
+            this.error = null;
+            try {
+                const response = await apiClient.get<Launch[]>('launches');
+                this.launches = response.data;
+                console.log(this.launches)
+            } catch (err) {
+                this.error = 'Failed to fetch launches data';
+                console.error(err);
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async addLaunch(launch: Launch) {
+            try {
+                const response = await apiClient.post<Launch>('/launches', launch);
+            } catch (error) {
+                console.error('Error adding launch:', error);
+            }
+        },
+
+        async deleteLaunch(id: string) {
+            try {
+                const response = await apiClient.delete(`/launches/${id}`);
+            } catch (error) {
+                console.error('Error deleting launch:', error);
             }
         },
     },

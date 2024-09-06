@@ -17,19 +17,13 @@
       </button>
     </div>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-      <div class="text-sm lg:flex-grow">
-        <a
-          href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-        >
-          Docs
-        </a>
-        <a
-          href="#responsive-header"
-          class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-        >
-          Examples
-        </a>
+      <div class="text-lg lg:flex-grow">
+        <span class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
+          <router-link to="/">Home</router-link>
+        </span>
+        <span class="block mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">
+          <router-link to="/saved-launches">Saved Launches</router-link>
+        </span>
       </div>
     </div>
   </nav>
