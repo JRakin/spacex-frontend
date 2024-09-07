@@ -18,9 +18,5 @@ export const convertDate = (isoDate: string) => {
   const day = date.getUTCDate();
   const weekday = date.toLocaleString('en-US', { weekday: 'short' });
 
-  const hours = String(date.getUTCHours()).padStart(2, '0');
-  const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-  const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-
-  return `${weekday} ${month} ${day} ${year} ${hours}:${minutes}:${seconds}`;
+  return `${weekday}, ${month} ${day} ${year}`;
 };

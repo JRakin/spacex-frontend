@@ -8,7 +8,7 @@ export const useLaunchStore = defineStore("launchStore", {
     launches: [] as Array<{
       flight_number: number;
       name: string;
-      date_utc: string;
+      date_utc: Date;
       _id: string;
     }>,
     loading: false,
@@ -45,7 +45,13 @@ export const useLaunchStore = defineStore("launchStore", {
 
     async addLaunch(launch: Launch) {
       try {
-        const response = await apiClient.post<Launch>("/launches", launch);
+        const { flight_number, name, date_utc } = launch;
+        const payload = {
+          flight_number,
+          name,
+          date_utc: new Date(date_utc),
+        };
+        const response = await apiClient.post<Launch>("/launches", payload);
         this.launches = this.launches.filter(
           (item) =>
             item.flight_number !== launch.flight_number ||

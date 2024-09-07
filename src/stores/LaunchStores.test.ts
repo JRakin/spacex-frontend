@@ -80,13 +80,13 @@ describe('LaunchStore', () => {
   });
 
   it('addLaunch should add a launch and handle success', async () => {
-    const newLaunch = { flight_number: 3, name: 'Launch 3', date_utc: '2024-09-03T00:00:00Z', _id: '3' };
+    const newLaunch = { flight_number: 3, name: 'Launch 3', date_utc: new Date('2024-09-03T00:00:00Z'), _id: '3' };
     
     (apiClient.post as Mock).mockResolvedValue({ data: newLaunch });
 
     const store = useLaunchStore();
     store.launches = [
-      { flight_number: 1, name: 'Launch 1', date_utc: '2024-09-01T00:00:00Z', _id: '1' },
+      { flight_number: 1, name: 'Launch 1', date_utc: new Date('2024-09-01T00:00:00Z'), _id: '1' },
     ];
 
     await store.addLaunch(newLaunch);
@@ -99,7 +99,7 @@ describe('LaunchStore', () => {
     (apiClient.post as Mock).mockRejectedValue(new Error('Failed to add launch'));
 
     const store = useLaunchStore();
-    await store.addLaunch({ flight_number: 4, name: 'Launch 4', date_utc: '2024-09-04T00:00:00Z', _id: '4' });
+    await store.addLaunch({ flight_number: 4, name: 'Launch 4', date_utc: new Date('2024-09-04T00:00:00Z'), _id: '4' });
 
     expect(toast.error).toHaveBeenCalledWith('Failed to add launch');
   });
@@ -109,8 +109,8 @@ describe('LaunchStore', () => {
 
     const store = useLaunchStore();
     store.launches = [
-      { flight_number: 1, name: 'Launch 1', date_utc: '2024-09-01T00:00:00Z', _id: '1' },
-      { flight_number: 2, name: 'Launch 2', date_utc: '2024-09-02T00:00:00Z', _id: '2' },
+      { flight_number: 1, name: 'Launch 1', date_utc: new Date('2024-09-01T00:00:00Z'), _id: '1' },
+      { flight_number: 2, name: 'Launch 2', date_utc: new Date('2024-09-02T00:00:00Z'), _id: '2' },
     ];
     await store.deleteLaunch('1');
 

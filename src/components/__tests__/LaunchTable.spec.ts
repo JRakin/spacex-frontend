@@ -1,17 +1,17 @@
 import { render, fireEvent, screen } from '@testing-library/vue';
-import LaunchTable from '@/components/LaunchTable.vue'; // Adjust the path as necessary
+import LaunchTable from '@/components/LaunchTable.vue';
 import type { Launch } from '@/types/launch';
 import { describe, it, expect, vi } from 'vitest'; 
 import '@testing-library/jest-dom';
 
-vi.mock('@/helper/helper', () => ({
+vi.mock('helper', () => ({
   convertDate: (date: string) => date,
 }));
 
 describe('LaunchTable.vue', () => {
   const launches: Launch[] = [
-    { flight_number: 1, name: 'Launch 1', date_utc: '2024-09-01T00:00:00Z', _id: '1' },
-    { flight_number: 2, name: 'Launch 2', date_utc: '2024-09-02T00:00:00Z', _id: '2' },
+    { flight_number: 1, name: 'Launch 1', date_utc: new Date('2024-09-01T00:00:00Z'), _id: '1' },
+    { flight_number: 2, name: 'Launch 2', date_utc: new Date('2024-09-02T00:00:00Z'), _id: '2' },
   ];
 
   it('renders launch data correctly', () => {
@@ -28,12 +28,12 @@ describe('LaunchTable.vue', () => {
   });
 
   it('shows "Add" button when showDeleteButton is false', () => {
-    const { getAllByRole } = render(LaunchTable, {
+    const { getAllByTestId } = render(LaunchTable, {
       props: { launches, showDeleteButton: false }
     });
 
-    const addButtons = screen.getAllByTestId('add-button');
-    expect(addButtons.length).toBe(2); // Assuming there are 2 launches
+    const addButtons = getAllByTestId('add-button');
+    expect(addButtons.length).toBe(2);
   });
 
   it('shows "Delete" button when showDeleteButton is true', () => {
@@ -42,7 +42,7 @@ describe('LaunchTable.vue', () => {
     });
 
     const deleteButtons = getAllByRole('button', { name: /Delete/i });
-    expect(deleteButtons.length).toBe(2); // Assuming there are 2 launches
+    expect(deleteButtons.length).toBe(2);
   });
 
   it('calls addLaunch when "Add" button is clicked', async () => {
