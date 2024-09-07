@@ -22,10 +22,17 @@ export default defineComponent({
 </script>
 <template>
   <div class="p-10">
-    <div v-if="launchStore.loading" class="flex items-center justify-center min-h-screen">
-        <Spinner />
+    <div
+      v-if="launchStore.loading"
+      class="flex items-center justify-center min-h-screen"
+    >
+      <Spinner />
     </div>
-    <LaunchTable :launches="launchStore.launches" :addLaunch="launchStore.addLaunch" :showDeleteButton="false"/>
+    <LaunchTable
+      :launches="launchStore.launches"
+      :addLaunch="launchStore.addLaunch"
+      :showDeleteButton="false"
+    />
   </div>
 </template>
 <style></style>
