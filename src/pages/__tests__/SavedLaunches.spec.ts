@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
 import SavedLaunches from "../SavedLaunches.vue";
-import Spinner from "@/components/Spinner.vue";
 import { createTestingPinia } from "@pinia/testing";
 import { mount } from "@vue/test-utils";
 
