@@ -10,7 +10,7 @@ export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
 });
 
-export const convertDate = (isoDate: string) => {
+export const convertDate = (isoDate: Date) => {
   const date = new Date(isoDate);
 
   const year = date.getUTCFullYear();
