@@ -3,6 +3,9 @@ Backend Link: https://github.com/JRakin/spacex-backend
 
 ## Project Setup
 
+## Node version
+Please use node version 18.15.0 or higher.
+
 ```sh
 npm install
 ```
